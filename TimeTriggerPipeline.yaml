@@ -7,4 +7,4 @@ steps:
       azureSubscription: 'azureconnection2'
       scriptType: 'bash'
       scriptLocation: 'scriptPath'
-      scriptPath: 'az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query ''controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'''
+      scriptPath: 'az --version'
