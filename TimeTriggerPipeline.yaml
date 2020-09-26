@@ -1,10 +1,10 @@
-trigger:
-  - master
 pool:
   vmImage: 'Ubuntu-16.04'
+
 steps:
   - task: AzureCLI@2
     inputs:
+      azureSubscription: 'azureconnection'
       scriptType: 'bash'
-      scriptLocation: 'inlineScript'
-      inlineScript: 'upgrades=$(az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query ''controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'')'
+      scriptLocation: 'scriptPath'
+      scriptPath: 'az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query ''controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'''
