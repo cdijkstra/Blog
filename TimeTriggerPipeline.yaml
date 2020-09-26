@@ -4,7 +4,7 @@ pool:
 steps:
   - task: AzureCLI@2
     inputs:
-      azureSubscription: 'azureconnection2'
+      azureSubscription: 'azureconnection'
       scriptType: 'bash'
       scriptLocation: 'scriptPath'
       scriptPath: 'az --version'
