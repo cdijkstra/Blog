@@ -1,5 +1,8 @@
-- task: AzureCLI@2
-  inputs:
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'upgrades=$(az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query ''controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'')'
+pool:
+  vmImage: ubuntu-latest
+steps:
+  - task: AzureCLI@2
+    inputs:
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: 'upgrades=$(az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query ''controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'')'
