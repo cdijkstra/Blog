@@ -1,7 +1,7 @@
+trigger:
+  - master
 pool:
-  vmImage: ubuntu-latest
-branches:
-  include: master
+  vmImage: 'Ubuntu-16.04'
 steps:
   - task: AzureCLI@2
     inputs:
