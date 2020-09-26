@@ -1,5 +1,7 @@
 pool:
   vmImage: ubuntu-latest
+branches:
+  include: master
 steps:
   - task: AzureCLI@2
     inputs:
