@@ -3,12 +3,11 @@ pool:
 
 steps:
   - task: AzureCLI@2
-    displayName: Azure CLI
+    displayName: GetUpgrades
     inputs:
       azureSubscription: azureconnection
       scriptType: bash
       scriptLocation: inlineScript
       inlineScript: |
-        az --version
-        az account show
-  
+        upgrades=$(az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query 'controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'. -o tsv)
+        echo "##vso[task.setvariable variable=versions;]$upgrades"
