@@ -1,11 +1,14 @@
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 steps:
   - task: AzureCLI@2
+    displayName: Azure CLI
     inputs:
-      azureSubscription: 'azureconnection'
-      scriptType: 'pscore'
-      scriptLocation: 'scriptPath'
-      scriptPath: 'az --version'
+      azureSubscription: azureconnection
+      scriptType: ps
+      scriptLocation: inlineScript
+      inlineScript: |
+        az --version
+        az account show
   
