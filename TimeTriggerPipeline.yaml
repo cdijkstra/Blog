@@ -5,6 +5,7 @@ steps:
   - task: AzureCLI@2
     inputs:
       azureSubscription: 'azureconnection'
-      scriptType: 'bash'
+      scriptType: 'pscore'
       scriptLocation: 'scriptPath'
       scriptPath: 'az --version'
+  
