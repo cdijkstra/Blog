@@ -9,5 +9,5 @@ steps:
       scriptType: bash
       scriptLocation: inlineScript
       inlineScript: |
-        upgrades=$(az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query 'controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'. -o tsv)
+        upgrades=$(az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query 'controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion' -o tsv)
         echo "##vso[task.setvariable variable=versions;]$upgrades"
