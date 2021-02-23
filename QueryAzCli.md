@@ -3,8 +3,8 @@ The Azure client calls the Azure REST API and allows us to retrieve information 
 For instance, we can run the following command to obtain information about an AKS cluster:\
 \
 `az aks get-upgrades --resource-group <rg-name> --name <aks-name>`\
-(or more complactly:\
-`az aks get-upgrades -g <rg-name> -n <aks-name>`).\
+or more complactly:\
+`az aks get-upgrades -g <rg-name> -n <aks-name>`.\
 \
 This returns something like:
 ```
