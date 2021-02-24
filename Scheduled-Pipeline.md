@@ -3,9 +3,10 @@
 Releases for critical Azure components have occurred, and you were not aware of them. Ay!
 Why wouldn't we want to get an automatic notification (on Slack, Outlook or using another webhook) whenever a new version becomes supported?
 
-Let's say we want to be automatically informed whenever a new Kubernetes cluster becomes available, and will use a scheduled pipeline for that.
+Let's say we want to be automatically informed whenever a new *Kubernetes version* in AKS becomes available, and will use a scheduled pipeline for that.
 
-When AKS version 1.16.13 is installed, the Azure client returns:
+First we need to find out which possible upgrades are available (see [my blog on Azure CLI filters](https://github.com/cdijkstra/Blogs/blob/master/QueryAzCli.md) for more details on Azure Cli filters).
+When AKS version 1.16.13 is installed, Azure CLI returns:
 ```bash
 $ az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query 'controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'
 [
@@ -19,7 +20,7 @@ In other words, we see that the AKS cluster can be upgraded to 1.16.15 but also 
 ![](images/k8spipeline.png)
 Azure pipeline are well-suited to notify about upgrades, because we 1) can schedule these, 2) can perform a simple bash script and rest API calls. What should it look like?
 * Firstly, there is a *time-trigger* (cronjob) such that it runs regularly,
-* Then an `az` task retrieves available AKS upgrades,
+* Then an `az aks get-upgrades` task retrieves available AKS upgrades,
 * Lastly, in case of available upgrades, post these to your rest API.
 
 Let's start constructing our pipeline in Azure Devops. 
