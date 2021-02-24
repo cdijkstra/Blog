@@ -6,7 +6,7 @@ Why wouldn't we want to get an automatic notification (on Slack, Outlook or usin
 Let's say we want to be automatically informed whenever a new Kubernetes cluster becomes available, and will use a scheduled pipeline for that.
 
 When AKS version 1.16.13 is installed, the Azure client returns:
-```
+```bash
 $ az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query 'controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'
 [
   "1.16.15",
@@ -24,18 +24,21 @@ Azure pipeline are well-suited to notify about upgrades, because we 1) can sched
 
 Let's start constructing our pipeline in Azure Devops. 
 We want the pipeline to be *scheduled* and not to be triggered by pull requests and pushes to any branches. This means our first part of the pipeline will look like
-```
+```yaml
 pool:
   vmImage: 'ubuntu-latest'
-trigger: none
-pr: none
+trigger: none # !
+pr: none      # Otherwise it's also triggered by code changes!
 schedules:
-- cron: "0 8 * * Mon"
+- cron: "0 8 * * Mon" # Check available upgrades every monday at 9:00AM
+  branches:
+    include:
+    - master
 ```
 
 Typing in `az cli` in the assistant gives us the `AzureCLI@2` task that allows us to use `az` commands. This is preferable over a bash script, since the `az login` using the service principal happens automatically. We need an Azure Resource Manager (ARM) service connection for this task. 
 
-```
+```yaml
 steps:
   - task: AzureCLI@2
     displayName: Getk8sUpgrades
@@ -46,8 +49,8 @@ steps:
       inlineScript: |
         $upgrades = az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query 'controlPlaneProfile.upgrades[?isPreview==null.kubernetesVersion' -o tsv
 ```
-Now let's see if we can access this variable in the next step.
-```
+Now let's test whether this variable can be accessed in the next step...
+```yaml
 - task: Bash@3
     name: Test_variable_is_received
     inputs:
@@ -55,15 +58,16 @@ Now let's see if we can access this variable in the next step.
       script: |
         echo "Upgrades='$(Upgrades)'"
 ```
-leads to `Upgrades=''`, so the variable is not received.
+This print `Upgrades=''`, indicating that the variable is not received. 🧐
+
 The next step is to set the versions as an **output variable** so this variable can be used in the ensuing step.
 ## Setting a multi-job output variable
 In order to use the variable `upgrades` in the post step, we have to set it as [a multi-job output variable](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch). When adding the line 
-```
+```bash
 Write-Output("##vso[task.setvariable variable=Upgrades;]$upgrades")
 ```
 to the powershell script (this can also be done to a bash script), we can use the variable in the next step.
-```
+```yaml
 - task: Bash@3
     name: Test_variable_is_received
     inputs:
@@ -74,7 +78,7 @@ to the powershell script (this can also be done to a bash script), we can use th
 and we obtain `"Posting update to VictorOps, upgrade versions: 1.16.15, 1.17.9, 1.17.11"`
 Note: we can only access this variable in the *next* step, if we need it even later we need to declare stage-dependencies. This is not necessary here :) Now let's use the `InvokeRESTAPI` step to actually post something!
 
-```
+```yaml
  - task: InvokeRESTAPI@1
     name: Post_nonpreview_upgrades
     inputs:
@@ -87,11 +91,21 @@ Note: we can only access this variable in the *next* step, if we need it even la
         (...) 
       }'
 ```
+This works like a charm!👌 
+![](Images/victoropsNotification.png)
 
-## Only post when upgrades were found
-
-This works like a charm! Last improvements include not sending the messages when no upgrades are available, which would happen after upgrading to the most recent k8s version and setting some variables to keep the steps nice and simple.
+## Some improvements
+First make it work, then make it pretty. Time for some last improvements:
+* The first improvement is that we're setting some variables to keep the steps nice and simple. For instance:
 ```
+queryFilterPreviewVersions: '--query controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'
+```
+* After upgrading to the most recent k8s version, notifications will still be sent.
+Not sending the messages when no upgrades are available is achieved by choosing a suitable `condition:` on the last task. We can check if `variables.Upgrades` is empty and abort the pipeline if so. We therefore find `condition: ne(variables.Upgrades, '')`. We should keep in mind that we ae overwriting the default condition `succeeded()` (run if the previous task succeeded) and we want to keep that, so we write two condition combined in an `and(X, Y)` statement: `condition: and(succeeded(), ne(variables.Upgrades, ''))`.
+
+In the end we have obtained the following pipeline, which satisfies our conditions!
+
+```yaml
 pool:
   vmImage: 'ubuntu-16.04'
 trigger: none
@@ -102,7 +116,6 @@ schedules:
   branches:
     include:
     - master
-  always: true
 variables:
   akscluster: 'aks-cluster'
   resourcegroup: 'resource-group'
