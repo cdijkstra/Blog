@@ -79,3 +79,4 @@ Other useful output formats for Azure CLI commands are
 * `table`, 
 * `none` (for debugging purposes if you only want to be informed about warnings/errors),
 * perhaps you'll even use `yaml` on a casual Friday.
+
