@@ -35,6 +35,7 @@ Because the export would take a while, we made SQL Azure with private link suppo
 The export can be created straightforwardly using the Export button on SQL database
 ![](Images/SQL.png)
 Afterwards the Private Link option can be selected. Note the mentioned message: we have to manually approve the link from the Private Link tab in Azure! If not, the export remains stuck on 1\% without a message on what steps to take.
+
 ![](Images/backup.png)
 
 After a few minutes, the link can be approved here:
