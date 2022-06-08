@@ -47,7 +47,7 @@ The nice thing about these links is that they are removed automatically after th
 ## Second step: Importing
 Once the backup is completed, the import can be done identically with a private link from the target SQL SERVER (not database). *The database, if it already exists, has to be deleted first*. We can then import the database, where the private link requires approval again.
 
-## Third step (Wait, what?)
+## Third step (Wait, a third step?)
 We expected that this would be all, but we noted an issue. *We could not log in to the database with our previously configured accounts!* Close, but no cigar.
 
 The reason is that the export more than just the db scheme and contained data; the whole database including stored procedures and *user accounts* is restored. This means that you can only log in with the user/password (or AD users/groups if configured that way - I *do* recommend it, but that's for another time) that are stored on the source database. Rolling out the IaC again did not overwrite the log in settings, so what I recommend is the following:
