@@ -1,3 +1,10 @@
+---
+layout: post
+title:  Querying the Azure CLI
+author: Casper Dijkstra
+tags: azure
+---
+
 # Querying Azure cli output
 The Azure client calls the Azure REST API and allows us to retrieve information about deployed resources in the terminal.\
 For instance, we can run the following command to obtain information about an AKS cluster:\

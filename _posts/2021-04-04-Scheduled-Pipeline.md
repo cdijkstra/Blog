@@ -1,4 +1,9 @@
-## Creating automatic notifications about Kubernetes upgrades
+---
+layout: post
+title:  Creating automatic notifications about Kubernetes upgrades
+author: Casper Dijkstra
+tags: kubernetes automation pipeline
+---
 
 Releases for critical Azure components have occurred, and you were not aware of them. Ay!
 Why wouldn't we want to get an automatic notification (on Slack, Outlook or using another webhook) whenever a new version becomes supported?
@@ -17,7 +22,7 @@ $ az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query 'controlPlaneProfi
 ```
 In other words, we see that the AKS cluster can be upgraded to 1.16.15 but also to a newer major version! Let's first create notifications about both minor and major upgrades.
 ## Getting automatic notifications about upgrades
-![](../Images/k8spipeline.png)
+![](Images/s/k8spipeline.png)
 Azure pipeline are well-suited to notify about upgrades, because we 1) can schedule these, 2) can perform a simple bash script and rest API calls. What should it look like?
 * Firstly, there is a *time-trigger* (cronjob) such that it runs regularly,
 * Then an `az aks get-upgrades` task retrieves available AKS upgrades,
@@ -93,7 +98,7 @@ Note: we can only access this variable in the *next* step, if we need it even la
       }'
 ```
 This works like a charm!👌 
-![](../Images/victoropsNotification.png)
+![](Images/s/victoropsNotification.png)
 
 ## Some improvements
 First make it work, then make it pretty. Time for some last improvements:
