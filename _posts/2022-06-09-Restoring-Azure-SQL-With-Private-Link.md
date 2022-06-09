@@ -1,4 +1,9 @@
-# Restoring an Azure SQL database using Private Link
+---
+layout: post
+title:  Restoring an Azure SQL database using Private Link
+author: Casper Dijkstra
+tags: azure sql privatelink
+---
 
 ## Situation:
 Me and my colleagues are setting up a test environment for a customer that already has the Acceptance and Production environments defined in code. The IaC is written in ARM, you can expect a blog soon about how to convert that to bicep.
