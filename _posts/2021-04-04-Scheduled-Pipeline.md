@@ -5,6 +5,7 @@ date: '2021-04-04 13:30:00 +0100'
 categories: pipeline devops
 ---
 
+## Creating a cronjob pipeline
 Releases for critical Azure components have occurred, and you were not aware of them. Ay!
 Why wouldn't we want to get an automatic notification (on Slack, Outlook or using another webhook) whenever a new version becomes supported?
 
