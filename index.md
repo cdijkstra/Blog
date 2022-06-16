@@ -13,7 +13,7 @@
           <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
           <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
       </h1>
-      <div class="entry" style = "position:fixed; left:80px; top:20px;">
+      <div class="entry">
         {{ post.excerpt }}
       </div>
     </article>
