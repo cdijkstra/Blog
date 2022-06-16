@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "Azure CLI Querying tips and tricks"
 date: '2021-05-22 15:45:00 +0100'
 categories: devops jq
 ---
