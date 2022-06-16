@@ -1,8 +1,6 @@
 ---
 layout: post
-title:  Restoring an Azure SQL database using Private Link
-author: Casper Dijkstra
-tags: azure sql privatelink
+title:  "Restoring Azure SQL DBs using Private Link"
 ---
 
 ## Situation:

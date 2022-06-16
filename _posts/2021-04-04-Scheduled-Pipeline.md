@@ -1,3 +1,7 @@
+---
+layout: post
+title:  "Welcome to Jekyll!"
+---
 
 Releases for critical Azure components have occurred, and you were not aware of them. Ay!
 Why wouldn't we want to get an automatic notification (on Slack, Outlook or using another webhook) whenever a new version becomes supported?

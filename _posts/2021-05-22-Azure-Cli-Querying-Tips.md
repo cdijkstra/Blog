@@ -1,8 +1,6 @@
 ---
 layout: post
-title:  Querying the Azure CLI
-author: Casper Dijkstra
-tags: azure
+title:  "Welcome to Jekyll!"
 ---
 
 # Querying Azure cli output
