@@ -13,6 +13,7 @@ For instance, we can run the following command to obtain information about an AK
 or more complactly:\
 `az aks get-upgrades -g <rg-name> -n <aks-name>`.\
 \
+
 This returns something like:
 ```
 {
