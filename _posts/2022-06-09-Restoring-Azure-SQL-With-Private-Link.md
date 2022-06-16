@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Restoring Azure SQL DBs using Private Link"
+date: '2022-06-29 11:15:00 +0100'
+categories: azure sql pipeline privatelink
 ---
 
 ## Situation:

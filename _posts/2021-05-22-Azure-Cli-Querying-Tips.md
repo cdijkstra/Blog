@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Welcome to Jekyll!"
+date: '2021-05-22 15:45:00 +0100'
+categories: devops jq
 ---
 
 # Querying Azure cli output
