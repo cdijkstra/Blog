@@ -5,7 +5,7 @@ date: '2021-05-22 15:45:00 +0100'
 categories: devops jq
 ---
 
-## Querying Azure cli output
+## Mastering the --output variable of azure cli
 The Azure client calls the Azure REST API and allows us to retrieve information about deployed resources in the terminal.\
 For instance, we can run the following command to obtain information about an AKS cluster:\
 \
