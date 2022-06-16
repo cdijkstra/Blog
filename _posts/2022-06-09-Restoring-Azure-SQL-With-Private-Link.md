@@ -5,7 +5,7 @@ date: '2022-06-09 11:15:00 +0100'
 categories: azure sql pipeline privatelink
 ---
 
-## Situation:
+## Transferring data across a private link:
 Two non-trivial situations occur when using a private link to restore a SQL database using a private link - the export gets stuck on 1% and the login credentials change after the import. I'm gonna discuss what to do when that happens.
 
 My colleagues and I are setting up a test environment for a customer that already has the Acceptance and Production environments defined in code. The IaC is written in ARM, you can expect a blog soon about how to convert that to bicep.
