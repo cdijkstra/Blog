@@ -15,7 +15,7 @@
       <h3>
         <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
       </h3>
-      <div class="entry">
+      <div class="entry" style = "position:fixed; left:80px; top:20px;">
         {{ post.excerpt }}
       </div>
     </article>
