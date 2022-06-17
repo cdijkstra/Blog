@@ -9,7 +9,7 @@ categories: azure sql pipeline privatelink
 Two non-trivial situations occur when using a private link to restore a SQL database using a private link; (1) the export gets stuck on 1% and (2) the SQL credentials are modified after restoring. I'm gonna discuss what to do when that happens.
 
 My colleagues and I are setting up a test environment for a customer that already has the Acceptance and Production environments defined in code. The IaC is written in ARM, you can expect a blog soon about how to convert that to bicep.
-We could relatively easily deploy a test environment by providing `parameter.t.json` files and deploying the resource groups to a new subscription using `az deployment group -l $location --template-file template.json --parameters parameters.t.json` with a valid`$location` parameter. The cloud environment contains a SQL server group with the following characteristics:
+We could relatively easily deploy a test environment by providing `parameter.t.json` files and deploying the resource groups to a new subscription using `az deployment group -l $location --template-file template.json --parameters parameters.t.json` with a valid `$location` parameter. The cloud environment contains a SQL server group with the following characteristics:
 - 4 databases ✅
 - SQL failover group ✅
 - Deployed without any data.
@@ -39,14 +39,14 @@ Because the export would take a while, we made SQL Azure with private link suppo
 
 ## First step: Exporting
 The export can be created straightforwardly using the Export button on SQL database
-![](Images/s/SQL.png)
+![](../Images/s/SQL.png)
 Afterwards the Private Link option can be selected. Note the mentioned message: we have to manually approve the link from the Private Link tab in Azure! If not, the export remains stuck on 1\% without a message on what steps to take.
 
-![](Images/s/backup.png)
+![](../Images/s/backup.png)
 
 After a few minutes, the link can be approved here:
 
-![](Images/s/private-link.png)
+![](../Images/s/private-link.png)
 
 The nice thing about these links is that they are removed automatically after the backup process.
 
