@@ -40,14 +40,14 @@ Because the export would take a while, we made SQL Azure with private link suppo
 
 ## First step: Exporting
 The export can be created straightforwardly using the Export button on SQL database
-![](Images/SQL.png)
+![]({{ site.baseurl }}/Images/SQL.png)
 Afterwards the Private Link option can be selected. Note the mentioned message: we have to manually approve the link from the Private Link tab in Azure! If not, the export remains stuck on 1\% without a message on what steps to take.
 
-![](Images/backup.png)
+![]({{ site.baseurl }}/Images/backup.png)
 
 After a few minutes, the link can be approved here:
 
-![](Images/private-link.png)
+![]({{ site.baseurl }}/Images/private-link.png)
 
 The nice thing about these links is that they are removed automatically after the backup process.
 
