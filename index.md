@@ -35,10 +35,10 @@ img {
       <picture>
         <img src="{{ site.baseurl }}/images/{{ post.image }}">
       </picture>
+      <p class="right"><a href="{{ site.baseurl }}{{ post.url }}">Read more</a></p>
       <h4>
         <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
       </h4>
-      <p class="right"><a href="{{ site.baseurl }}{{ post.url }}">Read more</a></p>
     </article>
   {% endfor %}
 </div>
