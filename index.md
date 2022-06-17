@@ -23,7 +23,7 @@
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
       </h1>
       <picture>
-        <img src="img_orange_flowers.jpg" alt="Flowers" style="width:auto;">
+        <img src="Images/private-link.png" alt="PrivateLink" style="width:auto;">
       </picture>
       <div class="entry">
         {{ post.excerpt }}
