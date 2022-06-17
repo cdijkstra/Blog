@@ -3,7 +3,7 @@ author: Casper Dijkstra
 layout: post
 title:  "Restoring Azure SQL DBs using Private Link"
 date: '2022-06-09 11:15:00 +0100'
-categories: azure sql pipeline privatelink
+tags: azure sql pipeline privatelink
 image: privatelinksymbol.png
 ---
 
