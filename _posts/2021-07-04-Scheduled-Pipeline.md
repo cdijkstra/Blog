@@ -1,17 +1,17 @@
 ---
 layout: post
 title:  "Scheduled pipeline"
-date: '2021-04-04 13:30:00 +0100'
+date: '2021-07-04 13:30:00 +0100'
 categories: pipeline devops
 ---
 
-## Creating a cronjob pipeline
+## Creating a cronjob pipeline for noteworthy notifications
 Releases for critical Azure components have occurred, and you were not aware of them. Ay!
-Why wouldn't we want to get an automatic notification (on Slack, Outlook or using another webhook) whenever a new version becomes supported?
+Wouldn't you like to get an automatically notified (on Slack, Outlook or using another webhook) whenever a new version gets supported?
 
 Let's say we want to be automatically informed whenever a new *Kubernetes version* in AKS becomes available, and will use a scheduled pipeline for that.
 
-First we need to find out which possible upgrades are available (see [my blog on Azure CLI filters](https://github.com/cdijkstra/Blogs/blob/master/QueryAzCli.md) for more details on Azure Cli filters).
+First we need to find out which possible upgrades are available (see [my blog on Azure CLI filters](https://cdijkstra.github.io/Blog/devops/jq/2021/05/22/Azure-Cli-Querying-Tips.html) for more details on Azure Cli filters).
 When AKS version 1.16.13 is installed, Azure CLI returns:
 ```bash
 $ az aks get-upgrades -g rg-kubernetes-01 -n k8s-demo --query 'controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion'
