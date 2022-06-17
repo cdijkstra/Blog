@@ -1,4 +1,7 @@
 theme: jekyll-theme-hacker
 
-logo: Images/casper.png
+logo: images/casper.png
 author: Casper Dijkstra
+
+giscus:
+  repo: "cdijkstra/Blog"
