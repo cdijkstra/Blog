@@ -22,6 +22,9 @@
       <h1>
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
       </h1>
+      <picture>
+        <img src="img_orange_flowers.jpg" alt="Flowers" style="width:auto;">
+      </picture>
       <div class="entry">
         {{ post.excerpt }}
       </div>
