@@ -5,13 +5,12 @@ date: '2021-05-22 15:45:00 +0100'
 categories: devops jq jmespath
 ---
 
-## Mastering JMESPath queries in the Azure CLI
 Both the Azure CLI and pwsh commandlet interacts with the Azure REST API and allows us to retrieve information about deployed resources in the terminal.
 For instance, we can find out which Azure Kubernetes upgrades are available through\
 `az aks get-upgrades --resource-group <rg-name> --name <aks-name>` \
 but it may not be easy to filter the *relevant information* out of the returned info. I will show you how to do that in this blog.
 
-
+## Mastering JMESPath queries in the Azure CLI
 Aforementioned command returnssomething like:
 ```
 {

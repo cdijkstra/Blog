@@ -5,9 +5,9 @@ date: '2022-06-09 11:15:00 +0100'
 categories: azure sql pipeline privatelink
 ---
 
-## Transferring data across a private link:
 Two non-trivial situations occur when using a private link to restore a SQL database using a private link; (1) the export gets stuck on 1% and (2) the SQL credentials are modified after restoring. I'm gonna discuss what to do when that happens.
 
+## Transferring data across a private link:
 My colleagues and I are setting up a test environment for a customer that already has the Acceptance and Production environments defined in code. The IaC is written in ARM, you can expect a blog soon about how to convert that to bicep.
 We could relatively easily deploy a test environment by providing `parameter.t.json` files and deploying the resource groups to a new subscription using `az deployment group -l $location --template-file template.json --parameters parameters.t.json` with a valid `$location` parameter. The cloud environment contains a SQL server group with the following characteristics:
 - 4 databases ✅

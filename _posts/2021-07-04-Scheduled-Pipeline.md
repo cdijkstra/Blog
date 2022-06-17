@@ -1,11 +1,10 @@
 ---
 layout: post
-title:  "Scheduled pipeline"
+title:  "Creating a cronjob pipeline for noteworthy notifications"
 date: '2021-07-04 13:30:00 +0100'
 categories: pipeline devops
 ---
 
-## Creating a cronjob pipeline for noteworthy notifications
 Releases for critical Azure components have occurred, and you were not aware of them. Ay!
 Wouldn't you like to get an automatically notified (on Slack, Outlook or using another webhook) whenever a new version gets supported?
 
