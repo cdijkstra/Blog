@@ -22,12 +22,8 @@
       <h1>
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
       </h1>
-      <h3>
-        "What does it show here?
-        {{ post.image }}
-      </h3>
       <picture>
-        <img src="Images/{{ post.image }}.png" style="width:auto;">
+        <img src="{{ site.baseurl }}/Images/{{ post.image }}.png" style="width:auto;">
       </picture>
       <div class="entry">
         {{ post.excerpt }}
