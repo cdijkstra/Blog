@@ -1,20 +1,18 @@
 ---
 layout: post
-title:  "Azure CLI Querying tips and tricks"
+title:  "Mastering JMESPath queries in the Azure CLI"
 date: '2021-05-22 15:45:00 +0100'
 categories: devops jq
 ---
 
-## Mastering the --output variable of azure cli
-The Azure client calls the Azure REST API and allows us to retrieve information about deployed resources in the terminal.\
-For instance, we can run the following command to obtain information about an AKS cluster:\
-\
-`az aks get-upgrades --resource-group <rg-name> --name <aks-name>`\
-or more complactly:\
-`az aks get-upgrades -g <rg-name> -n <aks-name>`.\
-\
+## Mastering JMESPath queries in the Azure CLI
+Both the Azure CLI and pwsh commandlet interacts with the Azure REST API and allows us to retrieve information about deployed resources in the terminal.
+For instance, we can find out which Azure Kubernetes upgrades are available through\
+`az aks get-upgrades --resource-group <rg-name> --name <aks-name>` \
+but it may not be easy to filter the *relevant information* out of the returned info. I will show you how to do that in this blog.
 
-This returns something like:
+
+Aforementioned command returnssomething like:
 ```
 {
   "agentPoolProfiles": [
@@ -52,7 +50,7 @@ This returns something like:
   (...)
 }
 ```
-We are probably interested in the versions we can upgrade the cluster to, so let's obtain these versions.
+We are interested in the *versions the cluster can be upgraded to* (if available), so let's obtain these versions.
 A solution would be to pipe the output to `jq`, [a sed-like command tool for json output](https://stedolan.github.io/jq/), to obtain the right json properties of the controlPlaneProfile.\
 \
 Indeed, adding the following pipe to the to the `az aks` command `| jq '.controlPlaneProfile.upgrades[].kubernetesVersion'`gives us the desired output. For instance:
@@ -79,12 +77,7 @@ We can now set the bash variable
 ```
 availableNonpreviewUpgrades=`az aks get-upgrades -g <rg-name> -n <aks-name> --query controlPlaneProfile.upgrades[?isPreview==null].kubernetesVersion -o tsv`
 ```
-and post the available upgrades with
+and we can now display the available upgrades with something along the lines of
 ```
 echo "Available upgrades for AKS: $availableNonpreviewUpgrades"
 ```
-Other useful output formats for Azure CLI commands are 
-* `table`, 
-* `none` (for debugging purposes if you only want to be informed about warnings/errors),
-* perhaps you'll even use `yaml` on a casual Friday.
-
