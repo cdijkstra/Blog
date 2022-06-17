@@ -14,8 +14,9 @@
 }
 
 img {
-  max-width: 30%;
-  border-radius: 50%;
+  max-width: 20%;
+  height: auto;
+  border-radius: 10%;
 }
 </style>
 
