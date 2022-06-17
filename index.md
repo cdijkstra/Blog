@@ -4,9 +4,13 @@
 {% endif %}
 </head> -->
 
+<style>
+  .blue-border {border-left:solid 4px lightblue; padding-left:20px;}
+</style>
+
 ## Blog posts
 
-<div class="posts">
+<div class="blue-border">
   {% for post in site.posts %}
     <article class="post">
       <h1>
