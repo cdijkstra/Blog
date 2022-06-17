@@ -3,6 +3,7 @@ layout: post
 title:  "Restoring Azure SQL DBs using Private Link"
 date: '2022-06-09 11:15:00 +0100'
 categories: azure sql pipeline privatelink
+image: 'privatelinksymbol.png'
 ---
 
 Two non-trivial situations occur when using a private link to restore a SQL database using a private link; (1) the export gets stuck on 1% and (2) the SQL credentials are modified after restoring. I'm gonna discuss what to do when that happens.
