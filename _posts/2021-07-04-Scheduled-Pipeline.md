@@ -3,7 +3,7 @@ layout: post
 title:  "Creating a scheduled pipeline for noteworthy notifications"
 date: '2021-07-04 13:30:00 +0100'
 categories: pipeline devops
-image: 'cron.png'
+image: cron.png
 ---
 
 ## Cronjob pipeline

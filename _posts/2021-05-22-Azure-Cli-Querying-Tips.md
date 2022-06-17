@@ -3,7 +3,7 @@ layout: post
 title:  "Mastering JMESPath queries in the Azure CLI"
 date: '2021-05-22 15:45:00 +0100'
 categories: devops jq jmespath
-image: 'jmespath.png'
+image: jmespath.png
 ---
 
 ## Mastering JMESPath queries in the Azure CLI
