@@ -12,6 +12,11 @@
 [class$="post"] {
   border-bottom:dotted 4px darkcyan;
 }
+
+img {
+  max-width: 30%;
+  border-radius: 50%;
+}
 </style>
 
 ## Blog posts
@@ -23,7 +28,7 @@
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
       </h1>
       <picture>
-        <img src="{{ site.baseurl }}/images/{{ post.image }}" style="width:auto;">
+        <img src="{{ site.baseurl }}/images/{{ post.image }}">
       </picture>
       <div class="entry">
         {{ post.excerpt }}
