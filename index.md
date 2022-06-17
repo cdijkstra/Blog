@@ -23,7 +23,7 @@
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
       </h1>
       <picture>
-        <img src="Images/private-link.png" alt="PrivateLink" style="width:auto;">
+        <img src="Images/{{ post.image }}.png" alt="PrivateLink" style="width:auto;">
       </picture>
       <div class="entry">
         {{ post.excerpt }}
