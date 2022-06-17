@@ -10,7 +10,7 @@
 
 <style>
 [class$="post"] {
-  border-top:dotted 4px darkcyan;
+  border-bottom:dotted 4px darkcyan;
 }
 </style>
 
