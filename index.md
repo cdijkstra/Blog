@@ -17,6 +17,7 @@ img {
   max-width: 20%;
   height: auto;
   border-radius: 10%;
+  opacity: 0.9;
 }
 </style>
 
@@ -28,12 +29,12 @@ img {
       <h1>
         <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
       </h1>
-      <picture>
-        <img src="{{ site.baseurl }}/images/{{ post.image }}">
-      </picture>
       <div class="entry">
         {{ post.excerpt }}
       </div>
+      <picture>
+        <img src="{{ site.baseurl }}/images/{{ post.image }}">
+      </picture>
       <h4>
         <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
       </h4>
