@@ -5,7 +5,7 @@
 </head> -->
 
 <style>
-  .blue-border {border-left:solid 4px lightblue; padding-left:20px;}
+  .blue-border {border-left:solid 4px lightblue; padding-left:20px; border-top:dotted 4px darkcyan;}
 </style>
 
 ## Blog posts
