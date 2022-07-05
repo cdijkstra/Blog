@@ -20,7 +20,7 @@ parameters:
       - bob
 
 steps:
-  - ${{ each user in parameters.users }}:
+  - $\{\{ each user in parameters.users \}\}:
     - script: add-user.sh ${{ user }}
 ```
 What many people however do not know, is that we can also loop over more complicated objects such as users containing *an email address, age, et cetera*.
@@ -56,7 +56,7 @@ steps:
       displayName: 'Validate ARM Template Test'
       inputs:
         azureSubscription: 'ServicePrincipalt'
-        resourceGroupName: '${{ parameters.deployment }}t'
+        resourceGroupName: '$ { { parameters.deployment } } t'
         location: 'West Europe'
         csmFile: 'infra/Deployment/${{ parameters.deployment }}/template.json'
         csmParametersFile: 'infra/Deployment/${{ parameters.deployment }}/parameters.t.json'
