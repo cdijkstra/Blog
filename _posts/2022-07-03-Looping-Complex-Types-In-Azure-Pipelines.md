@@ -21,12 +21,8 @@ parameters:
 
 steps:
   - $\{\{ each user in parameters.users \}\}:
-    - script: add-user.sh $\{\{ user \}\}
+    - script: add-user.sh {% raw %} ${{ user }} {% endraw %}
 ```
-
-**Note: `$\{\{ bla \}\}` should be written without the backslashes (as "${{ bla }}"), but this is not highlighted correctly for some reason...**
-
-
 What many people however do not know, is that we can also loop over more complicated objects such as users containing *an email address, age, et cetera*.
 
 We will see two examples where loops are particularly fruitful in pipelines:
