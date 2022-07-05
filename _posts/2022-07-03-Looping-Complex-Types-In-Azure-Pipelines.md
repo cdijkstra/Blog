@@ -24,7 +24,7 @@ steps:
     - script: add-user.sh $\{\{ user \}\}
 ```
 
-**Note: `$\{\{ bla \}\}` should be written without the backslashes (as ${{ bla }}), but this is not highlighted correctly for some reason...**
+**Note: `$\{\{ bla \}\}` should be written without the backslashes (as "${{ bla }}"), but this is not highlighted correctly for some reason...**
 
 
 What many people however do not know, is that we can also loop over more complicated objects such as users containing *an email address, age, et cetera*.
