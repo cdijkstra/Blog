@@ -7,7 +7,7 @@ image: pipelines.png
 ---
 
 ## The benefit of loops in Azure Pipelines
-A common situation I run into when creating pipelines is that *similar steps should take place for different enviroments*. In software development we are all great fans of the DRY principle. I like to apply the DRY principle besides code to IaC and pipeline configuration too. In Azure pipelines we can easily do so by looping over `object` parameters!
+A common situation I run into when creating pipelines is that *similar steps should take place for different enviroments*. In software development we are all great fans of the DRY principle. What we sometimes forget is that it can be applied to IaC and pipeline configuration too. In Azure pipelines we can easily prevent repeating ourselves by looping over `object` parameters!
 
 ## Code examples
 We can loop over numbers, or usernames quite easily in Azure pipelines.
