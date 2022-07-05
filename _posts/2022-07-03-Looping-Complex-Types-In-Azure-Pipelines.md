@@ -11,7 +11,7 @@ A common situation I run into when creating pipelines is that *similar steps sho
 
 ## Code examples
 We can loop over numbers, or usernames quite easily in Azure pipelines.
-```
+```yml
 parameters:
   - name: users
     type: object
@@ -33,7 +33,7 @@ We will see two examples where loops are particularly fruitful in pipelines:
 When using ARM or bicep templates, it is a good practice to validate if the template + corresponding parameter files are syntactically correct. We do using the `az group deployment validate --template-file <template.yml> -- parameters <parameters.{d,t,p}>` command. I like to validate if it's valid for all environments beforing continuing to any of the deployments.
 
 What we like to create is a validation stage where a template is called which can be used for different resource groups. We have to pass the name of the RG to the template as a parameters, so we get:
-```
+```yml
 stages:
   - stage: ValidateInfra
     displayName: 'Validate infra'
@@ -41,7 +41,7 @@ stages:
       - job: Validate_infra
         displayName: 'Validate infra for all environments'
         steps:
-        - template: '../../CmcBs/Pipelines/validate-infra.yml'
+        - template: '/Pipelines/validate-infra.yml'
           parameters:
             deployment: '<RG>'
 ```
@@ -84,6 +84,7 @@ steps:
 ```
 
 and contains very similar steps. In fact, only the environmentname (`Test`, `Acc`, `Prod`) and environmentletters (`t`, `a`, `p`) are different! We can simplify this by adding the following [object parameter](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/runtime-parameters?view=azure-devops&tabs=script#parameter-data-types):
+
 ```yml
 parameters:
   - name: environmentObjects
