@@ -134,7 +134,7 @@ steps:
         csmParametersFile: 'infra/Deployment/$\{\{ parameters.deployment \}\}/parameters.$\{\{ environmentObject.environmentLetter \}\}.json'
         deploymentMode: 'Validation'
 ```
-which looks nice, compact and - not quite unimportant - does the job!
+which looks nice, compact and - not quite unimportant - works like a charm!
 
 ## Looping over stages - Rolling out infra
 A likewise need for loops arises when *deploying to different environments*. To get successful infra deployments, I need the following jobs:
@@ -183,4 +183,4 @@ stages:
 ```
 
 ## Conclusion
-The looping syntax `- $\{\{ each par in parameters.pars \}\}` provides a useful twist to pipelines where the amount of code can be minimized. Loops are not limited to simple types, we can construct more complicated objects *containing the same properties* and loop over them. This can save a tremendous amount of lines of code and is more appealing to read and maintain.
+The looping syntax `- $\{\{ each par in parameters.pars \}\}` provides a useful twist to pipelines where the amount of code can be minimized. Loops are not limited to simple types, we can construct more complicated objects *containing the same properties* and loop over them. This can save a tremendous amount of lines of code and is more appealing to read and maintain. Keep in mind that the backslashes should be removed from the code examples.
