@@ -21,7 +21,10 @@ parameters:
 
 steps:
   - $\{\{ each user in parameters.users \}\}:
-    - script: add-user.sh ${{ user }}
+    - script: add-user.sh ${{user}}
+    - script: add-user.sh ${{ user}}
+    - script: add-user.sh ${{user }}
+    - script: add-user.sh ${ user }
 ```
 What many people however do not know, is that we can also loop over more complicated objects such as users containing *an email address, age, et cetera*.
 
