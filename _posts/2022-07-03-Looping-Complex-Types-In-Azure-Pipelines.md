@@ -11,7 +11,7 @@ A common situation I run into when creating pipelines is that *similar steps sho
 
 ## Code examples
 We can loop over numbers, or usernames quite easily in Azure pipelines.
-```yml
+```
 parameters:
   - name: users
     type: object
