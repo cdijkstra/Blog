@@ -20,7 +20,7 @@ parameters:
       - bob
 
 steps:
-  - $\{\{ each user in parameters.users \}\}:
+  - ${{ each user in parameters.users }} {% endraw %}:
     - script: add-user.sh {% raw %} ${{ user }} {% endraw %}
 ```
 What many people however do not know, is that we can also loop over more complicated objects such as users containing *an email address, age, et cetera*.
@@ -56,30 +56,30 @@ steps:
       displayName: 'Validate ARM Template Test'
       inputs:
         azureSubscription: 'ServicePrincipalt'
-        resourceGroupName: '$\{\{ parameters.deployment \}\}t'
+        resourceGroupName: '{% raw %} ${{ parameters.deployment }} {% endraw %}t'
         location: 'West Europe'
-        csmFile: 'infra/Deployment/$\{\{ parameters.deployment \}\}/template.json'
-        csmParametersFile: 'infra/Deployment/$\{\{ parameters.deployment \}\|/parameters.t.json'
+        csmFile: 'infra/Deployment/{% raw %} ${{ parameters.deployment }} {% endraw %}/template.json'
+        csmParametersFile: 'infra/Deployment/{% raw %} ${{ parameters.deployment \}\|/parameters.t.json'
         deploymentMode: 'Validation'
 
     - task: AzureResourceGroupDeployment@2
       displayName: 'Validate ARM Template Acc'
       inputs:
         azureSubscription: 'ServicePrincipala'
-        resourceGroupName: '$\{\{ parameters.deployment \}\} a'
+        resourceGroupName: '{% raw %} ${{ parameters.deployment }} {% endraw %}a'
         location: 'West Europe'
-        csmFile: 'infra/Deployment/$\{\{ parameters.deployment \}\|/template.json'
-        csmParametersFile: 'infra/Deployment/$\{\{ parameters.deployment \}\|/parameters.a.json'
+        csmFile: 'infra/Deployment/{% raw %} ${{ parameters.deployment \}\|/template.json'
+        csmParametersFile: 'infra/Deployment/{% raw %} ${{ parameters.deployment \}\|/parameters.a.json'
         deploymentMode: 'Validation'
 
     - task: AzureResourceGroupDeployment@2
       displayName: 'Validate ARM Template Prod'
       inputs:
         azureSubscription: 'ServicePrincipalp'
-        resourceGroupName: '$\{\{ parameters.deployment \}\} p'
+        resourceGroupName: '{% raw %} ${{ parameters.deployment }} {% endraw %}p'
         location: 'West Europe'
-        csmFile: 'infra/Deployment/$\{\{ parameters.deployment \}\|/template.json'
-        csmParametersFile: 'infra/Deployment/$\{\{ parameters.deployment \}\|/parameters.p.json'
+        csmFile: 'infra/Deployment/{% raw %} ${{ parameters.deployment \}\|/template.json'
+        csmParametersFile: 'infra/Deployment/{% raw %} ${{ parameters.deployment \}\|/parameters.p.json'
         deploymentMode: 'Validation'
 ```
 
@@ -99,11 +99,11 @@ parameters:
 ```
 We can then loop over this object 
 ```
-  - $\{\{ each environmentObject in parameters.environmentObjects \}\} :
+  - {% raw %} ${{ each environmentObject in parameters.environmentObjects }} {% endraw %}:
 ```
 and reference the parameters using the [compile-time variable expressions](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch#understand-variable-syntax)
-* `$\{\{ environmentObject.environmentName \}\}`,
-* `$\{\{ environmentObject.environmentLetter \}\}`.
+* `{% raw %} ${{ environmentObject.environmentName }} {% endraw %}`,
+* `{% raw %} ${{ environmentObject.environmentLetter }} {% endraw %}`.
 
 We now obtain for `template.yml`
 ```yml
@@ -119,15 +119,15 @@ parameters:
       environmentLetter: 'p'
 
 steps:
-  - $\{\{ each environmentObject in parameters.environmentObjects \}\} :
+  - {% raw %} ${{ each environmentObject in parameters.environmentObjects }} {% endraw %}:
     - task: AzureResourceGroupDeployment@2
-      displayName: 'Validate ARM Template $\{\{ environmentObject.environmentName \}\}'
+      displayName: 'Validate ARM Template {% raw %} ${{ environmentObject.environmentName }} {% endraw %}'
       inputs:
-        azureSubscription: 'ServicePrincipal$\{\{ environmentObject.environmentName \}\}'
-        resourceGroupName: '$\{\{ parameters.deployment \}\}$\{\{ environmentObject.environmentLetter \}\}'
+        azureSubscription: 'ServicePrincipal {% raw %} {% raw %} ${{ environmentObject.environmentName }} {% endraw %}'
+        resourceGroupName: '{% raw %} ${{ parameters.deployment }} {% endraw %} {% raw %} ${{ environmentObject.environmentLetter }} {% endraw %}'
         location: 'West Europe'
-        csmFile: 'infra/Deployment/$\{\{ parameters.deployment \}\}/template.json'
-        csmParametersFile: 'infra/Deployment/$\{\{ parameters.deployment \}\}/parameters.$\{\{ environmentObject.environmentLetter \}\}.json'
+        csmFile: 'infra/Deployment/{% raw %} ${{ parameters.deployment }} {% endraw %}/template.json'
+        csmParametersFile: 'infra/Deployment/{% raw %} ${{ parameters.deployment }} {% endraw %}/parameters.{% raw %} ${{ environmentObject.environmentLetter }} {% endraw %}.json'
         deploymentMode: 'Validation'
 ```
 which looks nice, compact and - not quite unimportant - works like a charm!
@@ -156,16 +156,16 @@ parameters:
       variableGroup: 'ProductionSubscription'
 
 stages:
-  - $\{\{ each environmentObject in parameters.environmentObjects \}\} :
-    - stage: $\{\{ environmentObject.environmentName \}\}
+  - {% raw %} ${{ each environmentObject in parameters.environmentObjects }} {% endraw %}:
+    - stage: {% raw %} ${{ environmentObject.environmentName }} {% endraw %}
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-      displayName: 'Rollout infra $\{\{ environmentObject.environmentName \}\}'
+      displayName: 'Rollout infra {% raw %} ${{ environmentObject.environmentName }} {% endraw %}'
       variables:
-        - group: $\{\{ environmentObject.variableGroup \}\}
+        - group: {% raw %} ${{ environmentObject.variableGroup }} {% endraw %}
       jobs:
-        - deployment: '$\{\{ environmentObject.environmentAzDo \}\}'
-          environment: '$\{\{ environmentObject.environmentAzDo \}\}'
-          displayName: 'Rollout infra $\{\{ environmentObject.environmentName \}\}'
+        - deployment: '{% raw %} ${{ environmentObject.environmentAzDo }} {% endraw %}'
+          environment: '{% raw %} ${{ environmentObject.environmentAzDo }} {% endraw %}'
+          displayName: 'Rollout infra {% raw %} ${{ environmentObject.environmentName }} {% endraw %}'
           strategy:
             runOnce:
               deploy:
@@ -174,9 +174,9 @@ stages:
 
                   - template: 'rollout-infra.yml'
                     parameters:
-                      deployment: 'RG$\{\{ environmentObject.environmentLetter \}\}'
-                      environment: '$\{\{ environmentObject.environmentLetter \}\}'
+                      deployment: 'RG{% raw %} ${{ environmentObject.environmentLetter }} {% endraw %}'
+                      environment: '{% raw %} ${{ environmentObject.environmentLetter }} {% endraw %}'
 ```
 
 ## Conclusion
-The looping syntax `- $\{\{ each par in parameters.pars \}\}` provides a useful twist to pipelines where the amount of code can be minimized. Loops are not limited to simple types, we can construct more complicated objects *containing the same properties* and loop over them. This can save a tremendous amount of lines of code and is more appealing to read and maintain. Keep in mind that the backslashes should be removed from the code examples.
+The looping syntax `- {% raw %} ${{ each par in parameters.pars }} {% endraw %}` provides a useful twist to pipelines where the amount of code can be minimized. Loops are not limited to simple types, we can construct more complicated objects *containing the same properties* and loop over them. This can save a tremendous amount of lines of code and is more appealing to read and maintain. Keep in mind that the backslashes should be removed from the code examples.
