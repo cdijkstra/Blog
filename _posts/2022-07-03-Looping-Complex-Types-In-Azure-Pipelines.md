@@ -102,8 +102,8 @@ We can then loop over this object
   - {% raw %}${{ each environmentObject in parameters.environmentObjects }}{% endraw %}:
 ```
 and reference the parameters using the [compile-time variable expressions](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch#understand-variable-syntax)
-* `{% raw %} ${{ environmentObject.environmentName }} {% endraw %}`,
-* `{% raw %} ${{ environmentObject.environmentLetter }} {% endraw %}`.
+* `{% raw %}${{{% endraw %} environmentObject.environmentName {% raw %}}}{% endraw %}`,
+* `{% raw %}${{{% endraw %} environmentObject.environmentLetter {% raw %}}}{% endraw %}`.
 
 We now obtain for `template.yml`
 ```yml
