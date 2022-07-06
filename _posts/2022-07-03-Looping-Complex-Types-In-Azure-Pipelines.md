@@ -9,7 +9,6 @@ image: pipelines.png
 ## The benefit of loops in Azure Pipelines
 A common situation I run into when creating pipelines is that *similar steps should take place for different enviroments*. In software development we are all great fans of the DRY principle. What we sometimes forget is that it can be applied to IaC and pipeline configuration too. In Azure pipelines we can easily prevent repeating ourselves by looping over `object` parameters!
 
-## Code examples
 We can loop over numbers, or usernames quite easily in Azure pipelines.
 ```yml
 parameters:
@@ -35,7 +34,7 @@ We will see two examples where loops are particularly fruitful in pipelines:
 1. Validating that infra deployments are syntactically correct for all to-be-deployed-to envs. 
 1. In CI/CD pipelines we often want to deploy to an Azure Web App or Kubernetes cluster for different environments.
 
-## Looping over steps - Validating an infra deployment
+## Looping within jobs - Validating an infra deployment
 When using ARM or bicep templates, it is a good practice to validate if the template + corresponding parameter files are syntactically correct. We do using the `az group deployment validate --template-file <template.yml> -- parameters <parameters.{d,t,p}>` command. I like to validate if it's valid for all environments beforing continuing to any of the deployments.
 
 What we like to create is a validation stage where a template is called which can be used for different resource groups. We have to pass the name of the RG to the template as a parameters, so we get:
@@ -184,6 +183,7 @@ stages:
                       deployment: 'RG{% raw %}${{ environmentObject.environmentLetter }}{% endraw %}'
                       environment: '{% raw %}${{ environmentObject.environmentLetter }}{% endraw %}'
 ```
+Since the right environment name is set via the loop, we can also get our desired behavior with required approvals for deployments to prod and possible acc environments.
 
 ## Conclusion
 The looping syntax `- {% raw %} ${{ each par in parameters.pars }} {% endraw %}` provides a useful twist to pipelines where the amount of code can be minimized. Loops are not limited to simple types, we can construct more complicated objects *containing the same properties* and loop over them. This can save a tremendous amount of lines of code and is more appealing to read and maintain. Keep in mind that the backslashes should be removed from the code examples.
