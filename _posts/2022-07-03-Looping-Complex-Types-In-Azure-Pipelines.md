@@ -98,7 +98,7 @@ parameters:
       environmentLetter: 'p'
 ```
 We can then loop over this object 
-```
+```yml
   - {% raw %} ${{ each environmentObject in parameters.environmentObjects }} {% endraw %}:
 ```
 and reference the parameters using the [compile-time variable expressions](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch#understand-variable-syntax)
@@ -123,7 +123,7 @@ steps:
     - task: AzureResourceGroupDeployment@2
       displayName: 'Validate ARM Template {% raw %} ${{ environmentObject.environmentName }} {% endraw %}'
       inputs:
-        azureSubscription: 'ServicePrincipal {% raw %} {% raw %} ${{ environmentObject.environmentName }} {% endraw %}'
+        azureSubscription: 'ServicePrincipal {% raw %} ${{ environmentObject.environmentName }} {% endraw %}'
         resourceGroupName: '{% raw %} ${{ parameters.deployment }} {% endraw %} {% raw %} ${{ environmentObject.environmentLetter }} {% endraw %}'
         location: 'West Europe'
         csmFile: 'infra/Deployment/{% raw %} ${{ parameters.deployment }} {% endraw %}/template.json'
