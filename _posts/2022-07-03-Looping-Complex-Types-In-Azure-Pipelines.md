@@ -46,42 +46,47 @@ stages:
             deployment: '<RG>'
 ```
 The template itself contains the validation steps for the TAP phases, containing the `AzureResourceGroupDeployment@2` step with `deploymentMode: 'Validation'`. It initally looks like:
-```yml
-parameters:
-  - name: deployment
-    type: string
+<details>
+  <summary>Code example</summary>
+  <p>
+    ```yml
+    parameters:
+      - name: deployment
+        type: string
 
-steps:
-    - task: AzureResourceGroupDeployment@2
-      displayName: 'Validate ARM Template Test'
-      inputs:
-        azureSubscription: 'ServicePrincipalt'
-        resourceGroupName: '{% raw %}${{ parameters.deployment }}{% endraw %}t'
-        location: 'West Europe'
-        csmFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/template.json'
-        csmParametersFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/parameters.t.json'
-        deploymentMode: 'Validation'
+    steps:
+        - task: AzureResourceGroupDeployment@2
+          displayName: 'Validate ARM Template Test'
+          inputs:
+            azureSubscription: 'ServicePrincipalt'
+            resourceGroupName: '{% raw %}${{ parameters.deployment }}{% endraw %}t'
+            location: 'West Europe'
+            csmFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/template.json'
+            csmParametersFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/parameters.t.json'
+            deploymentMode: 'Validation'
 
-    - task: AzureResourceGroupDeployment@2
-      displayName: 'Validate ARM Template Acc'
-      inputs:
-        azureSubscription: 'ServicePrincipala'
-        resourceGroupName: '{% raw %}${{ parameters.deployment }}{% endraw %}a'
-        location: 'West Europe'
-        csmFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/template.json'
-        csmParametersFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/parameters.a.json'
-        deploymentMode: 'Validation'
+        - task: AzureResourceGroupDeployment@2
+          displayName: 'Validate ARM Template Acc'
+          inputs:
+            azureSubscription: 'ServicePrincipala'
+            resourceGroupName: '{% raw %}${{ parameters.deployment }}{% endraw %}a'
+            location: 'West Europe'
+            csmFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/template.json'
+            csmParametersFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/parameters.a.json'
+            deploymentMode: 'Validation'
 
-    - task: AzureResourceGroupDeployment@2
-      displayName: 'Validate ARM Template Prod'
-      inputs:
-        azureSubscription: 'ServicePrincipalp'
-        resourceGroupName: '{% raw %}${{ parameters.deployment }}{% endraw %}p'
-        location: 'West Europe'
-        csmFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/template.json'
-        csmParametersFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/parameters.p.json'
-        deploymentMode: 'Validation'
-```
+        - task: AzureResourceGroupDeployment@2
+          displayName: 'Validate ARM Template Prod'
+          inputs:
+            azureSubscription: 'ServicePrincipalp'
+            resourceGroupName: '{% raw %}${{ parameters.deployment }}{% endraw %}p'
+            location: 'West Europe'
+            csmFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/template.json'
+            csmParametersFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/parameters.p.json'
+            deploymentMode: 'Validation'
+    ```
+  </p>
+</details>
 
 and contains very similar steps. In fact, only the environmentname (`Test`, `Acc`, `Prod`) and environmentletters (`t`, `a`, `p`) are different! We can simplify this by adding the following [object parameter](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/runtime-parameters?view=azure-devops&tabs=script#parameter-data-types):
 
