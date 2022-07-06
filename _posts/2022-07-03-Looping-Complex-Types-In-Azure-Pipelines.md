@@ -48,7 +48,6 @@ stages:
 The template itself contains the validation steps for the TAP phases, containing the `AzureResourceGroupDeployment@2` step with `deploymentMode: 'Validation'`. It initally looks like:
 <details>
   <summary>Code example</summary>
-  <p>
     ```yml
     parameters:
       - name: deployment
@@ -85,7 +84,6 @@ The template itself contains the validation steps for the TAP phases, containing
             csmParametersFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/parameters.p.json'
             deploymentMode: 'Validation'
     ```
-  </p>
 </details>
 
 and contains very similar steps. In fact, only the environmentname (`Test`, `Acc`, `Prod`) and environmentletters (`t`, `a`, `p`) are different! We can simplify this by adding the following [object parameter](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/runtime-parameters?view=azure-devops&tabs=script#parameter-data-types):
