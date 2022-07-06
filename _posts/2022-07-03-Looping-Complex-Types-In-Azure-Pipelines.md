@@ -66,7 +66,7 @@ steps:
       displayName: 'Validate ARM Template Acc'
       inputs:
         azureSubscription: 'ServicePrincipala'
-        resourceGroupName: '{% raw %} ${{ parameters.deployment }} {% endraw %}a'
+        resourceGroupName: '{% raw %}${{ parameters.deployment }}{% endraw %}a'
         location: 'West Europe'
         csmFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/template.json'
         csmParametersFile: 'infra/Deployment/{% raw %}${{ parameters.deployment }}{% endraw %}/parameters.a.json'
@@ -99,7 +99,7 @@ parameters:
 ```
 We can then loop over this object 
 ```yml
-  - {% raw %} ${{ each environmentObject in parameters.environmentObjects }} {% endraw %}:
+  - {% raw %}${{ each environmentObject in parameters.environmentObjects }}{% endraw %}:
 ```
 and reference the parameters using the [compile-time variable expressions](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch#understand-variable-syntax)
 * `{% raw %} ${{ environmentObject.environmentName }} {% endraw %}`,
