@@ -18,10 +18,16 @@ parameters:
     default:
       - alice
       - bob
+  - name: db
+    type: object
+    default:
+    - db-one
+    - db-two
 
 steps:
   - {% raw %}${{ each user in parameters.users }}{% endraw %} :
-    - script: add-user.sh {% raw %}${{ user }}{% endraw %}
+    - {% raw %}${{ each db in parameters.db }}{% endraw %} :
+      - script: add-user.sh {% raw %}${{ user }}{% endraw %} {% raw %}${{ db }}{% endraw %}
 ```
 What many people however do not know, is that we can also loop over more complicated objects such as users containing *an email address, age, et cetera*.
 
