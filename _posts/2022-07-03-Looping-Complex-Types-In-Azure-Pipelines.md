@@ -20,7 +20,7 @@ parameters:
       - bob
 
 steps:
-  - ${{ each user in parameters.users }} {% endraw %}:
+  - {% raw %} ${{ each user in parameters.users }} {% endraw %}:
     - script: add-user.sh {% raw %} ${{ user }} {% endraw %}
 ```
 What many people however do not know, is that we can also loop over more complicated objects such as users containing *an email address, age, et cetera*.
