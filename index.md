@@ -18,16 +18,16 @@
     opacity: 0.8;
   }
 
-  a {
-    color: red;
+  p a {
+    color: mediumseagreen;
   }
 
-  a:hover { 
-    color: darkred;
+  p a:hover { 
+    color: lightseagreen;
     transition: 0.2s
   }
 
-  img:hover { transform: scale(1.05) rotate(5deg); }
+  img:hover { transform: scale(1.05) rotate(5deg) translate(20px, 0px); }
 </style>
 
 ## Blog posts
