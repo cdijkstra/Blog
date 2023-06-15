@@ -5,7 +5,7 @@
 </head> -->
 
 <style>
-  .blue-border {border-left:solid 4px lightblue; padding-left:20px border-top:inset 4px darkcyan;}
+  .blue-border {border-left:solid 4px lightblue; padding-left:20px border-top:dotted 4px darkcyan;}
 
   [class$="post"] {
     border-bottom:dotted 4px darkcyan;
@@ -18,9 +18,16 @@
     opacity: 0.8;
   }
 
-  a:hover { color: hotpink }
+  a {
+    color: red;
+  }
 
-  img:hover { transform: scale(1.3) rotate(5deg); }
+  a:hover { 
+    color: darkred;
+    transition: 0.2s
+  }
+
+  img:hover { transform: scale(1.05) rotate(5deg); }
 </style>
 
 ## Blog posts
