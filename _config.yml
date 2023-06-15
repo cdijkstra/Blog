@@ -8,3 +8,8 @@ github_username: cdijkstra
 
 giscus:
   repo: "cdijkstra/Blog"
+
+collections:
+  tags:
+    output: true
+    permalink: tags/:path/
