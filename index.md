@@ -97,6 +97,7 @@
       <h4 class=tags>
         {% for tag in post.tags %}
           {{ tag }}
+        {% endfor %}
       </h4>   
       <h4>
         <p class="post_date">{{ post.date | date: "%B %e, %Y" }}</p>
