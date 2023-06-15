@@ -4,6 +4,7 @@ description: Cloud adventures by Casper
 
 logo: images/casper.png
 author: Casper Dijkstra
+github_username: cdijkstra
 
 giscus:
   repo: "cdijkstra/Blog"
