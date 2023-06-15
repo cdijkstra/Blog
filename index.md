@@ -12,7 +12,7 @@
   }
 
   [class$="post"] {
-    border-bottom:dotted 4px darkcyan;
+    border-bottom:dotted 8px darkcyan;
   }
 
   img {
@@ -51,9 +51,35 @@
   .change-color:hover {
     background-position: left;
   }
+
+  .tag-filter {
+    margin-bottom: 20px;
+  }
+
+  .tag-filter__button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .tag-filter__button.active {
+    background-color: #333;
+    color: #fff;
+  }
 </style>
 
 <div class="change-color">Blog posts</div>
+
+<div class="tag-filter">
+  <button class="tag-filter__button active" data-filter="all">All</button>
+  <button class="tag-filter__button" data-filter="cloud">Cloud</button>
+  <button class="tag-filter__button" data-filter="csharp">C#</button>
+  <button class="tag-filter__button" data-filter="devops">DevOps</button>
+</div>
 
 <div class="blue-border">
   {% for post in site.posts %}
@@ -78,3 +104,30 @@
 ## Find me here 
 - [LinkedIn](https://www.linkedin.com/in/casper-dijkstra-30661897/)
 - [Github](https://github.com/cdijkstra)
+
+<script>
+// Add event listener to tag buttons
+const tagButtons = document.querySelectorAll('.tag-filter__button');
+const blogPosts = document.querySelectorAll('.post');
+
+tagButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    // Remove 'active' class from all buttons
+    tagButtons.forEach((btn) => btn.classList.remove('active'));
+
+    // Add 'active' class to the clicked button
+    button.classList.add('active');
+
+    const filter = button.getAttribute('data-filter');
+
+    // Filter the blog posts based on the selected tag
+    blogPosts.forEach((post) => {
+      if (filter === 'all' || post.getAttribute('data-tags').includes(filter)) {
+        post.style.display = 'block';
+      } else {
+        post.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
