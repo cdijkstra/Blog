@@ -2,7 +2,7 @@
 layout: post
 title:  "Looping over complex objects in Azure Pipelines"
 date: '2022-07-03 15:45:00 +0100'
-tags: devops azure-pipelines loops
+tags: DevOps Pipelines
 image: pipelines.png
 ---
 
