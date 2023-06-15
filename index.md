@@ -5,20 +5,22 @@
 </head> -->
 
 <style>
-  .blue-border {border-left:solid 4px lightblue; padding-left:20px; border-top:dotted 4px darkcyan;}
-</style>
+  .blue-border {border-left:solid 4px lightblue; padding-left:20px border-top:inset 4px darkcyan;}
 
-<style>
-[class$="post"] {
-  border-bottom:dotted 4px darkcyan;
-}
+  [class$="post"] {
+    border-bottom:dotted 4px darkcyan;
+  }
 
-img {
-  max-width: 20%;
-  height: auto;
-  border-radius: 10%;
-  opacity: 0.9;
-}
+  img {
+    max-width: 20%;
+    height: auto;
+    border-radius: 10%;
+    opacity: 0.8;
+  }
+
+  a:hover { color: hotpink }
+
+  img:hover { transform: scale(1.3) rotate(5deg); }
 </style>
 
 ## Blog posts
