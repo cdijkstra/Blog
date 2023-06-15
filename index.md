@@ -113,11 +113,9 @@
   {% endfor %}
 </div>
 
-<footer>
-<p>Find me here</p> 
+##Find me here
 - [LinkedIn](https://www.linkedin.com/in/casper-dijkstra-30661897/)
 - [Github](https://github.com/cdijkstra)
-</footer>
 
 <script>
 // Add event listener to tag buttons
