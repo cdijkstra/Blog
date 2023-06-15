@@ -51,35 +51,9 @@
   .change-color:hover {
     background-position: left;
   }
-
-  .change-color2 {
-    color: #31302B;
-    background: #FFF;
-    padding: 12px 17px;
-    margin: 25px;
-    font-family: 'OpenSansBold', sans-serif;
-    border: 3px solid #31302B;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border-radius: 2px;
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: inset 0 0 0 0 #31302B;
-    -webkit-transition: all ease 0.8s;
-    -moz-transition: all ease 0.8s;
-    transition: all ease 0.8s;
-  }
-  .change-color2:hover {
-    box-shadow: inset 100px 0 0 0 #e0e0e0;
-    color: #fff;
-  }
 </style>
 
 <div class="change-color">Blog posts</div>
-<div class="change-color2">Blog posts</div>
 
 <div class="blue-border">
   {% for post in site.posts %}
