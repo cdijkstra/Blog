@@ -73,7 +73,7 @@
 
   .tags
   {
-    color: midnightblue
+    color: Aqua
   }
 </style>
 
