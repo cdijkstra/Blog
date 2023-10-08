@@ -1,0 +1,70 @@
+.blue-border {
+    border-left:solid 4px lightblue; 
+    padding-left:20px;
+    border-top:dotted 4px darkcyan;
+  }
+
+  [class$="post"] {
+    border-bottom:dotted 8px darkcyan;
+  }
+
+  img {
+    max-width: 20%;
+    height: auto;
+    border-radius: 10%;
+    opacity: 0.8;
+  }
+
+  p a {
+    color: mediumseagreen;
+  }
+
+  p a:hover { 
+    color: darkseagreen;
+    transition: 0.2s
+  }
+
+  img:hover { 
+    transform: scale(1.05) rotate(5deg) translate(20px, 0px);
+  }
+
+  .change-color {
+    font: 22px Arial;
+    display: inline-block;
+    padding: 1em 2em;
+    text-align: center;
+    color: white;
+    background: red; /* default color */
+
+    /* "to left" / "to right" - affects initial color */
+    background: linear-gradient(to left, salmon 50%, lightblue 50%) right;
+    background-size: 200%;
+    transition: .5s ease-out;
+  }
+  .change-color:hover {
+    background-position: left;
+  }
+
+  .tag-filter {
+    margin-bottom: 20px;
+  }
+
+  .tag-filter__button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .tag-filter__button.active {
+    background-color: #333;
+    color: #fff;
+  }
+
+  .tags
+  {
+    color: Aqua
+  }
