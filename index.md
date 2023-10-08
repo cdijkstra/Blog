@@ -34,4 +34,4 @@
 - [LinkedIn](https://www.linkedin.com/in/casper-dijkstra-30661897/)
 - [Github](https://github.com/cdijkstra)
 
-<script src="myscripts.js"></script>
+<script src="js/myscripts.js"></script>
